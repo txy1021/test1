@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>甄嬛传后宫生存测试 · 宫中浮沉录</title>
+<meta name="description" content="25 道后宫情境抉择，测算心机、共情、隐忍、野心四维属性，推演你在甄嬛传中能活多少集、最终位份与对应角色。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 水墨背景 · 远山雾霭 -->
+<div class="ink-bg" aria-hidden="true">
+  <span class="ink-grain"></span>
+  <span class="ink-moon"></span>
+  <span class="ink-side-mark">宫中浮沉</span>
+  <svg class="ink-mountains" viewBox="0 0 1440 620" preserveAspectRatio="none">
+    <path class="m1" d="M0 468 C96 442 156 458 246 424 C336 390 402 442 500 420 C598 398 660 346 782 372 C904 398 984 456 1092 440 C1200 424 1332 458 1440 436 L1440 620 L0 620 Z"/>
+    <path class="m2" d="M0 508 C118 486 198 506 300 474 C402 442 470 498 580 482 C690 466 758 414 878 440 C998 466 1078 508 1188 492 C1298 476 1372 502 1440 486 L1440 620 L0 620 Z"/>
+    <path class="m3" d="M0 546 C110 528 190 548 292 518 C394 488 452 534 562 522 C672 510 742 464 862 490 C982 516 1062 546 1172 532 C1282 518 1362 542 1440 528 L1440 620 L0 620 Z"/>
+    <path class="m4" d="M0 588 C96 566 168 590 258 536 C300 508 340 512 386 540 C470 500 520 552 604 546 C688 540 746 486 832 512 C918 538 982 578 1074 566 C1166 554 1258 580 1350 566 C1398 558 1420 560 1440 562 L1440 620 L0 620 Z"/>
+  </svg>
+  <span class="ink-mist m-a"></span>
+  <span class="ink-mist m-b"></span>
+  <span class="ink-ripple r1"></span>
+  <span class="ink-ripple r2"></span>
+  <span class="ink-ripple r3"></span>
+</div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-seal" aria-hidden="true">宫</span>
+    <span class="brand-text">
+      <span class="brand-name">后宫生存测试</span>
+      <span class="brand-en">SURVIVAL&nbsp;IN&nbsp;THE&nbsp;HAREM</span>
+    </span>
+  </div>
+  <nav class="nav" aria-label="主导航">
+    <button type="button" class="nav-btn" data-goto="home">首页</button>
+    <button type="button" class="nav-btn" data-scroll="sec-rules">宫规</button>
+    <button type="button" class="nav-btn" data-scroll="sec-gallery">群像</button>
+    <button type="button" class="nav-btn" data-goto="quiz">应试</button>
+    <button type="button" class="nav-btn" data-goto="result">结局</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ==================== 首页 ==================== -->
+  <section class="view" id="view-home">
+    <section class="hero">
+      <p class="eyebrow">清 · 雍正朝 · 紫禁城</p>
+      <h1 class="hero-title">若你入宫<br>能活到第几集</h1>
+      <p class="hero-lead">
+        二十五道情境抉择，皆取自后宫真实的进退之间。<br>
+        没有标准答案，只有你本能会走的那条路——<em>而这条路，早已写好了结局。</em>
+      </p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="btn-start">入 宫 应 试</button>
+        <button type="button" class="btn btn-ghost" id="btn-last" hidden>查看上次结局</button>
+      </div>
+      <p class="hero-meta"><span>25 题</span><i></i><span>约 6 分钟</span><i></i><span>题库 <b id="bank-size">263</b> 题随机抽</span></p>
+    </section>
+
+    <section class="panel" id="sec-rules">
+      <h2 class="panel-title">宫 中 规 矩</h2>
+      <div class="cols">
+        <div class="col">
+          <h3>一 · 应答</h3>
+          <p>每道题给出一个后宫处境，四个选项分别代表四种活法。凭第一反应作答，不必权衡利弊——后宫里没有从容斟酌的时间。</p>
+        </div>
+        <div class="col">
+          <h3>二 · 记分</h3>
+          <p>每个选项按其对<strong>心机、共情、隐忍、野心</strong>的贡献加权计分。四者并非越高越好，过盛的野心与过软的心肠，同样致命。</p>
+        </div>
+        <div class="col">
+          <h3>三 · 推演</h3>
+          <p>系统依四维配比推演你能撑过的集数、最终册封的位份，并在后宫群像中找出与你最相近的那个人。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="sec-gallery">
+      <h2 class="panel-title">后 宫 群 像</h2>
+      <p class="panel-sub">以下为本次测试中可能被对标的人物，完成测试后系统将给出与你最相近的一位。</p>
+      <div class="gallery" id="gallery"></div>
+    </section>
+
+    <section class="panel" id="sec-dims">
+      <h2 class="panel-title">四 维 属 性</h2>
+      <div class="dims" id="dim-cards"></div>
+    </section>
+  </section>
+
+  <!-- ==================== 答题页 ==================== -->
+  <section class="view hidden" id="view-quiz">
+    <div class="quiz-head">
+      <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+      <div class="progress-labels">
+        <span id="progress-text">01 / 25</span>
+        <span id="progress-count">已作答 0 题</span>
+      </div>
+      <div class="dots" id="dots"></div>
+    </div>
+
+    <article class="question-card">
+      <div class="q-meta">
+        <span class="q-tag" id="q-tag">选秀入宫</span>
+        <span class="q-index" id="q-index">第 01 题</span>
+      </div>
+      <h2 class="q-scene" id="q-scene"></h2>
+      <p class="q-prompt">此刻你会如何行事？</p>
+      <div class="options" id="options" role="radiogroup" aria-label="选项"></div>
+      <div class="q-foot">
+        <button type="button" class="btn btn-ghost" id="btn-prev">上一题</button>
+        <span class="hint">可按键 1 – 4 直接作答</span>
+        <button type="button" class="btn btn-primary" id="btn-next">下一题</button>
+      </div>
+    </article>
+  </section>
+
+  <!-- ==================== 结果页 ==================== -->
+  <section class="view hidden" id="view-result">
+    <div class="result-hero">
+      <p class="eyebrow">终 局 推 演</p>
+      <div class="rank-block">
+        <div class="rank-item">
+          <span class="rank-label">可活至</span>
+          <span class="rank-value"><b id="r-ep">36</b> 集</span>
+        </div>
+        <div class="rank-sep" aria-hidden="true"></div>
+        <div class="rank-item">
+          <span class="rank-label">最终位份</span>
+          <span class="rank-value" id="r-rank">贵人</span>
+        </div>
+      </div>
+      <p class="result-lead" id="r-summary"></p>
+    </div>
+
+    <section class="panel result-panel">
+      <div class="role-block">
+        <figure class="role-figure">
+          <div class="portrait-frame" id="r-photo"></div>
+          <figcaption><span id="r-char">甄嬛</span><i id="r-char-rank">皇贵妃</i></figcaption>
+        </figure>
+        <div class="role-text">
+          <h2 class="panel-title">人 物 对 标</h2>
+          <h3 class="role-name" id="r-char-name">甄嬛</h3>
+          <p class="role-desc" id="r-char-desc"></p>
+          <p class="role-why" id="r-char-why"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel result-panel">
+      <h2 class="panel-title">属 性 图 谱</h2>
+      <div class="charts">
+        <figure class="chart-box">
+          <figcaption>四维雷达</figcaption>
+          <canvas id="canvas-radar" width="440" height="440"></canvas>
+          <p class="chart-note">数值为四维占比（合计 100%），虚线为均匀分布基准 25%</p>
+        </figure>
+        <div class="bar-box">
+          <div class="bars" id="bars"></div>
+          <p class="chart-note" id="r-bias"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel result-panel">
+      <h2 class="panel-title">位 份 阶 梯</h2>
+      <div class="ladder" id="ladder"></div>
+      <p class="chart-note" id="r-rank-note"></p>
+    </section>
+
+    <section class="panel result-panel">
+      <h2 class="panel-title">生 存 指 南</h2>
+      <div class="cols">
+        <div class="col"><h3>你的长处</h3><p id="r-good"></p></div>
+        <div class="col"><h3>致命之处</h3><p id="r-bad"></p></div>
+        <div class="col"><h3>宫中建议</h3><p id="r-advice"></p></div>
+      </div>
+    </section>
+
+    <details class="review">
+      <summary>逐 题 复 盘（25 题）</summary>
+      <div id="review-list" class="review-list"></div>
+    </details>
+
+    <div class="result-actions">
+      <button type="button" class="btn btn-primary" id="btn-retry">再 测 一 次</button>
+      <button type="button" class="btn btn-ghost" id="btn-copy">复制结局</button>
+      <button type="button" class="btn btn-ghost" id="btn-home">返回首页</button>
+    </div>
+    <p class="disclaimer">本测试为剧集同人向娱乐作品，结果由四维配比算法推演，仅供消遣，不作任何现实参照。</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>后宫生存测试系统 · 宫中浮沉录</span>
+  <span id="footer-note"></span>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/questions-1.js"></script>
+<script src="js/questions-2.js"></script>
+<script src="js/questions-3.js"></script>
+<script src="js/questions-4.js"></script>
+<script src="js/dims.js"></script>
+<script src="js/characters.js"></script>
+<script src="js/portrait.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
